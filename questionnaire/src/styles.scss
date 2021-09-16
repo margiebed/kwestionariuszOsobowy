@@ -1,1 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 70%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.toast-success {
+  background-color: rgb(5, 145, 5);
+}
+
+.toast-error {
+  background-color: rgb(207, 37, 37);
+}
+
+@import "assets/styles/base";
+@import "assets/styles/tables";
+
+.mat-form-field {
+  width: 260px;
+}
+
+table{
+  width: 100%;
+}
+
+.mat-column {
+  width: 32px;
+  border-right: 1px solid currentColor;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+}
+
+.mat-row:hover .mat-cell {
+  border-color: currentColor;
+}

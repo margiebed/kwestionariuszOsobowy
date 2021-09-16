@@ -1,0 +1,70 @@
+@import 'variables';
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: $background;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.data-header {
+  color: $white;
+  font-size: 22px;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: left;
+}
+
+.data-container {
+  position: relative;
+  width: 100%;
+  padding: 15px;
+  background: $white;
+  margin-left: 10%;
+  font-size: 14px;
+}
+.section-header {
+  color: $section;
+}
+
+.h1-employee{
+  text-transform: uppercase;
+  text-align: center;
+  padding: 15px;
+  color: $blue;
+  font-size: 1.5rem
+}
+
+p {
+  color: $blue;
+  font-size: 1em;
+}
+
+.mat-checkbox-layout { white-space: normal !important; }
+
+.snack-success{
+  background: $green;
+}
+
+.snack-error{
+  background: $red;
+}
+
+.btn-add{
+
+  background: $section;
+}
+
+.row {
+  padding: 10px;
+}
+
+.card {
+  margin: 10px;
+}
+
+.material-icons {
+  font-size: 30px;
+}
