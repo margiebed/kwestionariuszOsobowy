@@ -11,10 +11,10 @@ const routes: Routes = [
     path: "dashboard",
     component: DashboardComponent,
     canActivate: [AuthGuard],
-    // children: [
-    //   { path: "", redirectTo: "employees", pathMatch: "full" },
-    //   { path: "employees", loadChildren: () => import('./questionnaire/questionnaire.module').then(m => m.QuestionnaireModule)},
-    // ],
+    children: [
+      { path: "", redirectTo: "employees", pathMatch: "full" },
+      { path: "employees", loadChildren: () => import('./questionnaire/questionnaire.module').then(m => m.QuestionnaireModule)},
+    ],
   },
 ];
 
