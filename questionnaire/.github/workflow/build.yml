@@ -29,4 +29,4 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: "dist/angular-githubaction/*"
-          token: ${{ secrets.TOKEN_GITHUB_ACTION }}
+          token: ${{ secrets.API_TOKEN_GITHUB }}
