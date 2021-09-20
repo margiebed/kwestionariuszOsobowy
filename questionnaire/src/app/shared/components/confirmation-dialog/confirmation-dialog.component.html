@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>
+  <div fxFlex fxLayout="row" fxLayoutAlign="start center">
+    <span>{{data?.title}}</span>
+  </div>
+  <div fxFlex="10" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-icon-button mat-dialog-close #closeBtn>
+      <mat-icon aria-label="Close">close</mat-icon>
+    </button>
+  </div>
+</h1>
+
+<mat-dialog-content>
+  {{data.message}}
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <div fxFlex fxLayout="row" fxLayoutAlign="end center">
+    <button mat-button mat-dialog-close class="border-black">{{data.falseButtonName}}</button>
+    <button mat-button class="btn-submit" [mat-dialog-close]="true" cdkFocusInitial>{{data.trueButtonName}}</button>
+  </div>
+</mat-dialog-actions>

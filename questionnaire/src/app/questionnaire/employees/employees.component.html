@@ -1,0 +1,90 @@
+<div class="data-container">
+
+  <mat-table #table [dataSource]="dataSource" matSort matTableFilter
+             class="table table-striped w-100" >
+    <ng-container matColumnDef="login">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Login</th>
+      <td mat-cell *matCellDef="let employee"> {{employee.login}} </td>
+      <p></p>
+    </ng-container>
+    >
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Imię</th>
+      <td mat-cell *matCellDef="let employee"> {{employee.firstName}} </td>
+    </ng-container>
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nazwisko</th>
+      <td mat-cell *matCellDef="let employee"> {{employee.lastName}}  </td>
+    </ng-container>
+    <!--    <ng-container cdkColumnDef="actions">-->
+    <!--      <th mat-header-cell *cdkHeaderCellDef> Akcja</th>-->
+    <!--      <td mat-cell *cdkCellDef="let employee">-->
+    <!--        <button mat-raised-button color="primary" class="float-right" (click)="addEmployee(employee)"-->
+    <!--                (keyup.enter)="addEmployee(employee)" title="Add">Dodaj-->
+    <!--        </button>-->
+    <!--        <button mat-raised-button color="primary" class="float-right" (click)="goToViewEmployee(employee)"-->
+    <!--                (keyup.enter)="goToViewEmployee(employee)" title="View">Pokaż-->
+    <!--        </button>-->
+    <!--      </td>-->
+    <!--    </ng-container>-->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Akcja</th>
+      <td mat-cell *matCellDef="let employee">
+
+        <button mat-icon-button color="primary" (click)="showDetails(employee)"
+        >
+          <mat-icon class="mat-18">reorder</mat-icon>
+        </button>
+
+        <button mat-icon-button color="accent" (click)="goToEditEmployee(employee)"
+                title="Edytuj">
+          <mat-icon class="mat-18">mode</mat-icon>
+        </button>
+        <!--        <ng-template #addTemplate>-->
+        <!--          <button  mat-icon-button  color="accent"-->
+        <!--                   title="Dodaj / Edytuj">-->
+        <!--            <mat-icon class="mat-18">add</mat-icon>-->
+        <!--          </button></ng-template>-->
+      </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> Usuń</th>
+      <td mat-cell *matCellDef="let employee">
+        <button mat-icon-button color="warn"
+                title="Usuń">
+          <mat-icon class="mat-18">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let employee; columns: displayedColumns"></tr>
+    <ng-container matColumnDef="paginator">
+      <td mat-footer-cell *matFooterCellDef [colSpan]="displayedColumns.length">
+        <mat-paginator
+          [length]="totalSize"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="pageSizeOptions"
+          [showFirstLastButtons]="true">
+        </mat-paginator>
+      </td>
+    </ng-container>
+    <tr mat-footer-row *matFooterRowDef="['paginator']; sticky: true"></tr>
+  </mat-table>
+  <!--<div class="row flights-container">-->
+  <!--  <div class="col-sm-4" *ngFor="let employee of employees$ | async" (click)="showDetails(employee)">-->
+  <!--&lt;!&ndash;    <app-flight-card [flight]="flight"></app-flight-card>&ndash;&gt;-->
+  <!--<app-employee-card [employee]="employee"></app-employee-card>-->
+  <!--  </div>-->
+  <!--</div>-->
+  <button
+    (click)="addEmployee()"
+    mat-fab
+    color="accent"
+    id="new-questionnaire-btn"
+  >
+    +
+  </button>
+</div>
+

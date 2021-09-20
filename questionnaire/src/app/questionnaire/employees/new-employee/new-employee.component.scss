@@ -1,0 +1,28 @@
+@import "src/assets/styles/variables";
+
+.account-list-table {
+  margin-top: 15px;
+  min-width: 600px;
+
+  .mat-column-actions {
+    padding-right: 5px;
+  }
+}
+
+.account-list-content {
+  max-width: 1200px;
+}
+
+.add-button {
+  background-color: $primary;
+  color: #fff;
+}
+.no-info-of-table {
+  text-align: left;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: $accent;
+  padding: 20px;
+  background: $white;
+}

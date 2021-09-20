@@ -1,0 +1,18 @@
+{
+  "targets": {
+    "questionnaires-49d5a": {
+      "hosting": {
+        "questionnaire": [
+          "questionnaires-49d5a"
+        ]
+      }
+    },
+    "fir-demo-737a5": {
+      "hosting": {
+        "questionnaire": [
+          "fir-demo-737a5"
+        ]
+      }
+    }
+  }
+}

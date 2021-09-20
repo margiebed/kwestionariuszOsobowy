@@ -1,0 +1,11 @@
+<mat-toolbar color="primary" class="w-100">
+  <span>Kwestionariusz osobowy dla pracownika</span>
+<!--  <div class="row" *ngIf="ngAuthService.userState as user">-->
+
+  <div class="user-login ">Hello, {{user}}</div>
+  <div class="float-right"><mat-icon class="logout-icon " (click)="logout()">power_settings_new</mat-icon></div>
+</mat-toolbar>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+

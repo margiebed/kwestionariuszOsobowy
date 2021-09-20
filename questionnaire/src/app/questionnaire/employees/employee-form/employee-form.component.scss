@@ -1,0 +1,29 @@
+@import 'src/assets/styles/variables.scss';
+
+.invalid {
+  color: #f44336;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+form {
+  padding: 15px;
+}
+
+.custom-radio {
+  line-height: 2.5
+}
+
+
+button span {
+  font-size: 22px;
+}
+
+.action-buttons button {
+  margin: 5px;
+}
+.error{
+  font-size: 75%;
+}

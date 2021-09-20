@@ -1,0 +1,53 @@
+<div class="row justify-content-center login-container">
+  <div class="col-sm-4 shadow login-content">
+    <h3>Logowanie</h3>
+    <mat-form-field class="d-block">
+      <input matInput placeholder="Email" id="email" [(ngModel)]="credentials.email" required>
+      <mat-error>Email jest wymagany</mat-error>
+    </mat-form-field>
+    <mat-form-field class="d-block">
+      <input matInput placeholder="Password" id="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="credentials.password" required>
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <mat-error>Hasło jest wymagane</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" [matTooltip]="'test@test.pl / qwerty'" (click)="login()" (keyup)="login()">Zaloguj
+    </button>
+  </div>
+</div>
+
+<!--<div class="displayTable">-->
+<!--<div class="displayTableCell">-->
+
+<!--  <div class="authBlock">-->
+<!--    <h3>Signin</h3>-->
+<!--    <div class="formGroup">-->
+<!--      <input type="text" class="form-control" placeholder="Username" #userName required>-->
+<!--    </div>-->
+
+<!--    <div class="formGroup">-->
+<!--      <input type="password" class="form-control" placeholder="Password" #userPassword required>-->
+<!--    </div>-->
+
+<!--    <div class="formGroup">-->
+<!--      <input type="button" class="btn btn-primary btn-block" value="Sign in"-->
+<!--             (click)="authService.SignIn(userName.value, userPassword.value)">-->
+<!--    </div>-->
+
+<!--    <div class="formGroup">-->
+<!--      <button type="button" class="btn btn-danger btn-block" (click)="ngAuthService.GoogleAuth()">-->
+<!--        Log in with Google-->
+<!--      </button>-->
+<!--    </div>-->
+
+<!--    <div class="forgotPassword">-->
+<!--      <span routerLink="/forgot-password">Forgot Password?</span>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="redirectToLogin">-->
+<!--    <span>Not registered yet?<span class="redirect" routerLink="/sign-up"> Register</span></span>-->
+<!--  </div>-->
+
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->

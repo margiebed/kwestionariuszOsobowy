@@ -1,0 +1,541 @@
+<form  [formGroup]="employeeForm">
+  <div class="row">
+    <div class="shadow-sm card w-100">
+      <div class="card-body">
+        <h4 class="card-title d-flex align-items-center section-header">
+          <i class="material-icons">
+            account_circle
+          </i>
+          Dane osobowe</h4>
+
+        <div class="row">
+          <div class="col-md-6 w-100">
+            <mat-form-field>
+              <mat-label>Imię</mat-label>
+              <input matInput formControlName="firstName" id="firstName" type="text" class="form-control"
+                     placeholder="Imię"
+                     required/>
+              <mat-error>
+                <app-validation-feedback [control]="employeeForm.get('firstName')" [controlName]="'Imię'"
+                                         [maxLength]="'50'" [lastLetter]="'e'"></app-validation-feedback>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field>
+              <mat-label>Nazwisko</mat-label>
+              <input matInput formControlName="lastName" id="lastName" type="text" class="form-control" placeholder="Nazwisko"
+                     required/>
+
+              <mat-error>
+                <app-validation-feedback [control]="employeeForm.get('lastName')" [controlName]="'Nazwisko'"
+                                         [maxLength]="'50'" [lastLetter]="'e'"></app-validation-feedback>
+              </mat-error>
+            </mat-form-field>
+          </div></div>
+        <div class="row">
+          <div class="col-md-6 w-100">
+            <mat-form-field>
+              <mat-label>Login</mat-label>
+              <input matInput formControlName="login" id="login" type="text" class="form-control"
+                     placeholder="Login"
+                     required/>
+              <mat-error>
+                <app-validation-feedback [control]="employeeForm.get('login')" [controlName]="'Login'"
+                                         [maxLength]="'50'" [lastLetter]="'y'"></app-validation-feedback>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 w-100">
+            <mat-form-field>
+              <mat-label>Pesel</mat-label>
+              <label>
+                <input matInput formControlName="pesel" id="pesel" type="text" class="form-control" placeholder="Pesel" required/>
+              </label>
+              <mat-error>
+                <div
+                  *ngIf="(employeeForm.get('pesel').dirty || employeeForm.get('pesel').touched || employeeForm.get('pesel').pristine ) && employeeForm.get('pesel').invalid ">
+                  <div *ngIf="employeeForm.get('pesel').hasError('required')">PESEL jest wymagany</div>
+                  <div *ngIf="employeeForm.get('pesel').errors.pattern">PESEL nie może posiadać liter i znaków
+                    specjalnych
+                  </div>
+<!--                  <div *ngIf=" employeeForm.get('pesel').getError('peselError') as error">-->
+<!--                    <div *ngIf="error.length">PESEL posiada niepoprawną ilość znaków</div>-->
+<!--                    <div *ngIf="error.check">PESEL ma niepoprawny numer</div>-->
+<!--                  </div>-->
+                </div>
+              </mat-error>
+
+            </mat-form-field>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="shadow-sm card w-100">
+      <div class="card-body">
+
+        <h4 class="card-title d-flex align-items-center section-header">
+          <i class="material-icons">
+            home
+          </i>
+          Adres zamieszkania</h4>
+
+
+        <div formGroupName="employeeAddress">
+          <div class="row">
+            <div class="col-md-3">
+              <mat-form-field>
+                <mat-label>Adres</mat-label>
+                <input matInput formControlName="street" id="street" type="text" class="form-control" placeholder="Adres" required/>
+                <mat-error>
+                  <app-validation-feedback [control]="employeeForm.get('employeeAddress').get('street')"
+                                           [minLength]="'3'"
+                                           [controlName]="'Adres'" [maxLength]="'50'"
+                                           [lastLetter]="'y'"></app-validation-feedback>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3">
+              <mat-form-field>
+                <mat-label>Miejscowość</mat-label>
+                <input matInput formControlName="city" name ="city" type="text" class="form-control" placeholder="Miejscowość"
+                       required/>
+                <mat-error>
+                  <app-validation-feedback [control]="employeeForm.get('employeeAddress').get('city')"
+                                           [controlName]="'Miejscowość'" [maxLength]="'20'"
+                                           [lastLetter]="'a'"></app-validation-feedback>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3">
+              <mat-form-field>
+                <mat-label>Kod pocztowy</mat-label>
+                <input matInput formControlName="zipcode" type="text" class="form-control" placeholder="Kod pocztowy"
+                       required/>
+                <mat-error>
+                  <app-validation-feedback [control]="employeeForm.get('employeeAddress').get('zipcode')"
+                                           [controlName]="'Kod pocztowy'" [maxLength]="'5'" [pattern]="true"
+                                           [minLength]="5" [lastLetter]="'y'"></app-validation-feedback>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3">
+              <mat-form-field>
+                <mat-label>Telefon</mat-label>
+                <input matInput formControlName="telephone" id="telephone" type="text" class="form-control" placeholder="Telefon"
+                       required/>
+                <mat-error>
+                  <app-validation-feedback [control]="employeeForm.get('employeeAddress').get('telephone')"
+                                           [controlName]="'Telefon'" [minLength]="9" [pattern]="true"
+                                           [maxLength]="12" [lastLetter]="'y'"></app-validation-feedback>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="shadow-sm card w-100">
+      <div class="card-body">
+        <div class="d-flex justify-content-between card-title">
+          <h4 class="card-title d-flex align-items-center section-header">
+            <i class="material-icons">
+              people
+            </i>
+            Stan rodziny</h4>
+
+          <button class="btn btn-primary btn-add" title="Dodaj członka
+      rodziny" (click)="openFamilyMemberDialog(null)">+
+          </button>
+
+        </div>
+
+        <table mat-table
+               *ngIf="familyRows && familyRows.length>0; else emptyInfo"
+               [dataSource]="familyDataSource"
+               formArrayName="families" aria-label="Stan rodziny">
+          <ng-container cdkColumnDef="nameFamily">
+            <th mat-header-cell *matHeaderCellDef> Imię (imiona) i nazwisko</th>
+            <td mat-cell *matCellDef="let row; let i=index" [formGroupName]="i">
+              <span [innerHTML]="row.controls.nameFamily.value"></span>
+            </td>
+          </ng-container>
+          <ng-container cdkColumnDef="dobFamily">
+            <th mat-header-cell *matHeaderCellDef> Data urodzenia</th>
+            <td mat-cell *matCellDef="let row; let i=index" [formGroupName]="i">
+              {{ row.controls.dobFamily.value | date: FULL_DATE_FORMAT }}
+            </td>
+          </ng-container>
+          <ng-container cdkColumnDef="relation">
+            <th mat-header-cell *matHeaderCellDef> Pokrewieństwo</th>
+            <td mat-cell *matCellDef="let row; let i=index" [formGroupName]="i">
+              {{FamilyRelation[row.controls.relation.value]}}
+            </td>
+          </ng-container>
+          <ng-container cdkColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Akcja</th>
+            <td mat-cell *matCellDef="let row; let i=index" [formGroupName]="i">
+              <mat-icon class="icon action-icon" (click)="openFamilyMemberDialog(i)"
+                        (keyup.enter)=" openFamilyMemberDialog(i)" title="Edytuj czonka rodziny" tabindex="0"
+                        aria-hidden="false">edit
+              </mat-icon>
+              <mat-icon class="icon action-icon" (click)="deleteFamilyMember(i)" (keyup.enter)="deleteFamilyMember(i)"
+                        title="Usuń członka rodziny" tabindex="0" aria-hidden="false">delete
+              </mat-icon>
+
+          </ng-container>
+
+          <tr mat-header-row *cdkHeaderRowDef="displayedFamilyColumns"></tr>
+          <tr mat-row *cdkRowDef="let row; let i=index; columns: displayedFamilyColumns;"></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="shadow-sm card w-100">
+      <div class="card-body">
+        <div class="d-flex justify-content-between card-title">
+          <h4 class="d-flex align-items-center section-header">
+            <i class="material-icons">
+              accessibility
+            </i>
+            Osoba(y), którą należy zawiadomić w razie wypadku</h4>
+          <button class="btn btn-primary btn-add" (click)="openContactPersonDialog(null)">+</button>
+        </div>
+
+
+        <div fxLayout="row wrap" fxLayoutAlign="space-between baseline" fxLayoutGap="10px">
+          <table mat-table
+                 *ngIf="contactPersonRows && contactPersonRows.length>0; else emptyInfo"
+                 [dataSource]="contactPersonDataSource"
+                 formArrayName="contactPersons" aria-label="Osoby do kontaktu">
+            <ng-container cdkColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Imię (imiona) i nazwisko</th>
+              <td mat-cell *matCellDef="let row; let i=index" [formGroupName]="i">
+                {{ row.controls.contactPersonName.value}}
+              </td>
+            </ng-container>
+
+            <ng-container cdkColumnDef="street">
+              <th mat-header-cell *matHeaderCellDef>Adres</th>
+              <td mat-cell *matCellDef="let row; let i=index" [formGroupName]="i">
+                {{row.get('contactPersonAddress').get('street').value}} {{row.get('contactPersonAddress').get('city').value}}
+
+              </td>
+            </ng-container>
+
+            <ng-container cdkColumnDef="phone">
+              <th mat-header-cell *matHeaderCellDef> Telefon</th>
+              <td mat-cell *matCellDef="let row; let i=index" [formGroupName]="i">
+                {{row.get('contactPersonAddress').get('telephone').value}}
+                {{row.controls.contactPersonAddress.telephone}}
+              </td>
+            </ng-container>
+            <ng-container cdkColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef> Akcja</th>
+              <td mat-cell *matCellDef="let row; let i=index" [formGroupName]="i">
+                <mat-icon class="icon action-icon" (click)="openContactPersonDialog(i)"
+                          (keyup.enter)="openContactPersonDialog(i)" title="Edytuj osobę do kontaktu" tabindex="0"
+                          aria-hidden="false">edit
+                </mat-icon>
+                <mat-icon class="icon action-icon" (click)="deleteContactPerson(i)"
+                          (keyup.enter)="deleteContactPerson(i)"
+                          title="Usuń osobę do kontaktu" tabindex="0" aria-hidden="false">delete
+                </mat-icon>
+            </ng-container>
+
+            <tr mat-header-row *cdkHeaderRowDef="displayedContactPersonColumns"></tr>
+            <tr mat-row *cdkRowDef="let row; let i=index; columns: displayedContactPersonColumns;"></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div class="shadow-sm card w-100">
+      <div class="card-body">
+        <h4 class="card-title d-flex align-items-center section-header">
+          <i class="material-icons">
+            school
+          </i>
+          Wykształcenie</h4>
+        <div class="row align-items-end">
+
+          <div class="col-sm-4">
+            <mat-form-field>
+              <mat-label>Wykształcenie:</mat-label>
+              <mat-select formControlName="currentDegree" id="currentDegree" placeholder="Wykształcenie" required>
+                <mat-option *ngFor="let degree of currentDegrees" [value]="degree"
+                            role="option">{{CurrentDegree[degree]}}</mat-option>
+              </mat-select>
+              <mat-error>
+                <app-validation-feedback [control]="employeeForm.get('currentDegree')"
+                                         [controlName]="'Wykształcenie'" [lastLetter]="'e'"></app-validation-feedback>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4">
+            <mat-form-field>
+              <mat-label>Rok ukończenia:</mat-label>
+              <mat-select placeholder="Rok ukończenia" id="finishedYearSchool" formControlName="finishedYearSchool">
+                <mat-option *ngFor="let y of years" [value]="y" role="option">
+                  {{y}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field>
+              <mat-label>Nazwa szkoły:</mat-label>
+              <input matInput formControlName="finishedNameSchool" id="finishedNameSchool" type="text" class="form-control"
+                     placeholder="Nazwa szkoły ukończenia"/>
+              <mat-error>
+                <app-validation-feedback [control]="employeeForm.get('finishedNameSchool')"
+                                         [controlName]="'Nazwa szkoły ukończenia'"
+                                         [maxLength]="'255'"></app-validation-feedback>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field>
+              <mat-label>Zawód, specjalność:</mat-label>
+              <input matInput formControlName="profession" id="profession" type="text" class="form-control"
+                     placeholder="Zawód, specjalność"/>
+              <mat-error>
+                <app-validation-feedback [control]="employeeForm.get('profession')" [controlName]="'Zawód, specjalność'"
+                                         [maxLength]="100"></app-validation-feedback>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field>
+              <mat-label>Stopień (tytuł zawodowy - naukowy):</mat-label>
+              <input matInput formControlName="professionAcademicTitle" id="professionAcademicTitle" type="text" class="form-control"
+                     placeholder="stopień"/>
+              <mat-error>
+                <app-validation-feedback [control]="employeeForm.get('professionAcademicTitle')"
+                                         [controlName]="'Stopień'"
+                                         [maxLength]="'40'"></app-validation-feedback>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field>
+              <mat-label>Data uzyskania pierwszego tytułu zawodowego</mat-label>
+              <input matInput formControlName="firstHigherTitleDate" id="firstHigherTitleDate" [matDatepicker]="picker" [max]="date"/>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-12 custom-radio">
+            Pierwszy tytuł zawodowy:*
+            <mat-radio-group formControlName="firstHigherTitle" id="firstHigherTitle" required>
+              <mat-radio-button *ngFor="let firstHigher of TITLES"
+                                [value]="firstHigher.value">
+                {{firstHigher.label}}
+              </mat-radio-button>
+            </mat-radio-group>
+            <mat-error>
+              <div *ngIf="employeeForm.get('firstHigherTitle').hasError('required') && isClicked" class="error">
+                Pierwszy tytuł zawodowy jest wymagany.
+              </div>
+            </mat-error>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Supplementary Education -->
+    <div class="shadow-sm card w-100">
+      <div class="card-body">
+        <div class="d-flex justify-content-between card-title">
+          <h4 class="d-flex align-items-center section-header">
+            <i class="material-icons">
+              cast_for_education
+            </i>
+            Wykształcenie uzupełniające</h4>
+          <button class="btn btn-primary btn-add" title="Dodaj
+      kursy, studia podyplomowe (itp.)" (click)="openSupplementaryEducationDialog(null)">+
+          </button>
+        </div>
+
+        <div class="row w-100">
+          <div formArrayName="supplementaryEducations" class="crew-cointainer shadow" *ngFor="let supply of supplEducation.controls;index as index">
+            <div class="row crew-header">
+              <div class="col">
+                <span> {{ index +1}}</span>
+                <mat-icon class="float-right" (click)="removeSupplementaryEducationsMember(index)">delete_forever</mat-icon>
+
+
+              </div>
+            </div>
+
+            <div class="row" [formGroupName]="index">
+              <div class="col-sm-5">
+                <mat-form-field>
+                  <input matInput formControlName="name" placeholder="Name">
+                </mat-form-field>
+              </div>
+
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!--    Work-->
+    <div class="shadow-sm card w-100">
+      <div class="card-body">
+        <div class="d-flex justify-content-between card-title">
+          <h4 class="d-flex align-items-center section-header">
+            <i class="material-icons">
+              timeline
+            </i>
+            Przebieg pracy zawodowej</h4>
+          <button class="btn btn-primary btn-add" (click)="openWorkDialog(null)">+</button>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <!--            <mat-radio-group formControlName="isFirstWork" id="isFirstWork" [value]="employee.isFirstWork">Czy to pierwsza praca?*-->
+            <!--              <mat-radio-button class="example-radio-button" *ngFor="let isFirst of YES_NO" [value]="isFirst.value">-->
+            <!--                {{isFirst.label}}-->
+            <!--              </mat-radio-button>-->
+            <!--              <mat-error>-->
+            <!--                <div *ngIf="employeeForm.get('isFirstWork').hasError('required') && isClicked" class="error">-->
+            <!--                  Pierwsza praca jest wymagana-->
+            <!--                </div>-->
+            <!--              </mat-error>-->
+            <!--            </mat-radio-group>-->
+
+
+            <table mat-table
+                   *ngIf="workRows && workRows.length>0; else emptyInfo"
+                   [dataSource]="worksDataSource"
+                   formArrayName="works" aria-label="Praca">
+              <ng-container matColumnDef="fromJob">
+                <th mat-header-cell *matHeaderCellDef> Okres od</th>
+                <td mat-cell *matCellDef="let row; let i=index" [formGroupName]="i">
+                  <span [innerHTML]="row.controls.fromJob.value"></span>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="toJob">
+                <th mat-header-cell *matHeaderCellDef> Okres do</th>
+                <td mat-cell *matCellDef="let row; let i=index" [formGroupName]="i">
+                  <span [innerHTML]="row.controls.toJob.value"></span>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="companyName">
+                <th mat-header-cell *matHeaderCellDef> Nazwa zakładu pracy</th>
+                <td mat-cell *matCellDef="let row; let i=index" [formGroupName]="i">
+                  {{ row.controls.companyName.value}}
+
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="placeJob">
+                <th mat-header-cell *matHeaderCellDef>Miejscowość</th>
+                <td mat-cell *matCellDef="let row; let i=index" [formGroupName]="i">
+                  <span [innerHTML]="row.controls.placeJob.value"></span>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="positionJob">
+                <th mat-header-cell *matHeaderCellDef> Stanowisko</th>
+                <td mat-cell *matCellDef="let row; let i=index" [formGroupName]="i">
+                  <span [innerHTML]="row.controls.positionJob.value"></span>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Akcja</th>
+                <td mat-cell *matCellDef="let row; let i=index" [formGroupName]="i">
+                  <mat-icon class="icon action-icon" (click)="openWorkDialog(i)"
+                            (keyup.enter)="openWorkDialog(i)" title="Edytuj prcaę" tabindex="0"
+                            aria-hidden="false">edit
+                  </mat-icon>
+                  <mat-icon class="icon action-icon" title="Usuń" tabindex="0" aria-hidden="false"
+                            (click)="deleteWork(i)">delete
+                  </mat-icon>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *cdkHeaderRowDef="displayedWorkColumns"></tr>
+              <tr mat-row
+                  *matRowDef="let row; columns: displayedWorkColumns;"></tr>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="shadow-sm card w-100">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <mat-checkbox formControlName="isAgree" id="isAgree" required><p>
+              Wyrażam zgodę na przetwarzanie moich danych osobowych w firmie XYZ.PL Sp. z o. o. Jednocześnie oświadczam,
+              że
+              przekazuję moje dane osobowe całkowicie dobrowolnie.
+              Oświadczam ponadto, że zostałem/zostałam poinformowany/poinformowana o przysługującym mi prawie dostępu do
+              treści tych danych i możliwości ich poprawiania, a także o prawie wycofania zgody na przetwarzanie tych
+              danych
+              w
+              każdym czasie.</p>
+<!--              <mat-error>-->
+<!--                <div *ngIf="employeeForm.get('isAgree').hasError('required') && isClicked" class="error">-->
+<!--                  Musisz wyrazić zgodę-->
+<!--                </div>-->
+<!--              </mat-error>-->
+            </mat-checkbox>
+          </div>
+        </div>
+
+        <div class="row align-items-end">
+
+
+          <mat-form-field>
+            <input matInput formControlName="updateCity" id="updateCity" type="text" class="form-control" placeholder="Miejscowość"
+                   required/>
+            <mat-error>
+              <app-validation-feedback [control]="employeeForm.get('updateCity')" [controlName]="'Miejscowość'"
+                                       [maxLength]="'20'" [lastLetter]="'a'"></app-validation-feedback>
+            </mat-error>
+          </mat-form-field>
+
+
+          <!--          <mat-form-field>-->
+          <!--            <mat-label *ngIf="editMode">Ostatnia modyfikacja</mat-label>-->
+          <!--            <mat-label *ngIf="!editMode">Data</mat-label>-->
+
+          <!--            <input name="updateDate" matInput [matDatepicker]="picker2" disabled formControlName="updateDate">-->
+          <!--            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>-->
+          <!--            <mat-datepicker #picker2></mat-datepicker>-->
+          <!--          </mat-form-field>-->
+
+
+          <mat-form-field>
+            <input matInput formControlName="updateDate" id="updateDate" type="date" class="form-control" placeholder="Miejscowość"
+                   required/>
+            <mat-error>
+              <app-validation-feedback [control]="employeeForm.get('updateCity')" [controlName]="'Miejscowość'"
+                                       [maxLength]="'20'" [lastLetter]="'a'"></app-validation-feedback>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+    </div>
+    <ng-template #emptyInfo>
+      <div class="no-info-of-table">
+        <p>Brak informacji</p>
+      </div>
+    </ng-template>
+  </div>
+</form>
+
+
+
+

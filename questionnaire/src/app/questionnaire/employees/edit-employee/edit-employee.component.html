@@ -1,0 +1,16 @@
+<div class="data-container">
+  <h1 class="h1-employee">Kwestionariusz osobowy dla pracownika <strong> {{employee?.key}}- edycja</strong></h1>
+  <app-employee-form #employeeFormValues [editMode]="true"></app-employee-form>
+
+  <mat-card-actions align="end">
+    <div class="btn-group d-flex " role="group" >
+      <button mat-button class="btn btn-sm btn-secondary w-75 " (click)="employeeFormValues.onCloseWithoutChanges()">Zamknij</button>
+      <button mat-button class="btn btn-large btn-success w-75" (click)="editEmployee()">Zapisz</button>
+
+    </div>
+
+  </mat-card-actions>
+
+</div>
+
+

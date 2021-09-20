@@ -1,0 +1,221 @@
+<mat-dialog-content>
+  <!--<div class="data-container">-->
+  <h1 class="h1-employee">Kwestionariusz osobowy dla pracownika <strong> {{employee?.login}}</strong></h1>
+  <div class="shadow-sm card w-100">
+    <div class="card-body">
+      <h4 class="card-title d-flex align-items-center section-header">
+        <i class="material-icons">
+          account_circle
+        </i>
+        Dane osobowe</h4>
+      <div class="row">
+        <div class="col-md-4 float-right"><p>Nazwisko:</p> {{employee?.lastName}}</div>
+        <div class="col-md-4"><p>Imię (imiona): </p>{{employee.firstName}}</div>
+        <div class="col-md-4"><p>PESEL: </p>{{employee.pesel}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="shadow-sm card w-100">
+    <div class="card-body">
+      <h4 class="card-title d-flex align-items-center section-header">
+        <i class="material-icons">
+          home
+        </i>
+        Adres zamieszkania</h4>
+      <div class="row">
+        <div class="col-md-3"><p class="label">Adres:</p> {{employee.employeeAddress.street}}</div>
+        <div class="col-md-3"><p class="label">Miejscowość:</p> {{employee.employeeAddress.city}}</div>
+        <div class="col-md-3"><p class="label">Kod pocztowy: </p>{{employee.employeeAddress.zipcode}}</div>
+        <div class="col-md-3"><p class="col-md-12label">Telefon:</p> {{employee.employeeAddress.telephone}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="shadow-sm card w-100">
+    <div class="card-body">
+      <h4 class="card-title d-flex align-items-center section-header">
+        <i class="material-icons">
+          people
+        </i>
+        Stan rodziny</h4>
+      <div class="row">
+        <div class="col-md-12">
+          <table class="cs-table table table-striped"
+                 *ngIf="employee.families &&employee.families.length>0; else emptyInfo">
+            <thead>
+            <tr>
+              <th>nr</th>
+              <th>imię(imiona) i nazwisko</th>
+              <th> data ur</th>
+              <th>pokrewieństwo</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let member of employee.families; let i = index" class="row-contact">
+              <td>{{i + 1}}</td>
+              <td> {{member.nameFamily}}</td>
+              <td> {{member.dobFamily}}  </td>
+              <td> {{FamilyRelation[member.relation]}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="shadow-sm card w-100">
+    <div class="card-body">
+      <h4 class="d-flex align-items-center section-header">
+        <i class="material-icons">
+          accessibility
+        </i>
+        Osoba(y), którą należy zawiadomić w razie wypadku</h4>
+      <div class="row">
+        <div class="col-md-12">
+          <table class="cs-table table table-striped"
+                 *ngIf="employee.contactPersons && employee.contactPersons.length>0; else emptyInfo">
+            <thead>
+            <tr>
+              <th>Nr</th>
+              <th>Imię i nazwisko</th>
+              <th> Adres</th>
+              <th>Telefon</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let contactPerson of employee.contactPersons; let i = index" class="row-contact">
+              <td>{{i + 1}}</td>
+              <td> {{contactPerson.contactPersonName}}</td>
+              <td> {{contactPerson.contactPersonAddress.street}}  {{contactPerson.contactPersonAddress.zipcode}}  {{contactPerson.contactPersonAddress.city}}</td>
+              <td> {{contactPerson.contactPersonAddress.telephone}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="shadow-sm card w-100">
+    <div class="card-body">
+      <h4 class="card-title d-flex align-items-center section-header">
+        <i class="material-icons">
+          school
+        </i>
+        Wykształcenie</h4>
+      <div class="row">
+        <div class="col-md-4"><p>Wykształcenie:</p> {{current[employee.currentDegree]}}</div>
+        <div class="col-md-4"><p>Rok ukończenia:</p> {{employee.finishedYearSchool}}</div>
+        <div class="col-md-4"><p>Nazwa szkoły ukończenia: </p>{{employee.finishedNameSchool}}</div>
+
+        <div class="col-md-4"><p>Stopień (tytuł
+          naukowy):</p>{{employee?.profession}} {{employee?.professionAcademicTitle}}
+        </div>
+        <div class="col-md-4"><p>Data uzyskania pierwszego tytułu zawodowego: </p>{{employee.firstHigherTitleDate}}
+        </div>
+        <div class="col-md-4"><p>Pierwszy tytuł zawodowy:</p>{{(getTitle(employee))}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="shadow-sm card w-100">
+    <div class="card-body">
+      <h4 class="d-flex align-items-center section-header">
+        <i class="material-icons">
+          cast_for_education
+        </i>
+        Wykształcenie uzupełniające</h4>
+      <p> (kursy, studia podyplomowe, data ukończenia lub rozpoczęcia nauki
+        w przypadku jej trwania):</p>
+      <div class="row">
+        <div class="col-md-12">
+          <ul>
+            <li *ngFor="let supplementary of employee.supplementaryEducations">
+              {{supplementary.name}} <span
+              *ngIf="supplementary.educationDate || supplementary.during"> - {{supplementary.educationDate}} {{yesNo[supplementary.during]}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="shadow-sm card w-100">
+    <div class="card-body">
+      <h4 class="d-flex align-items-center section-header">
+        <i class="material-icons">
+          timeline
+        </i>
+        Przebieg pracy zawodowej</h4>
+      <div class="col-md-12"><p>Pierwsza praca na umowę o pracę</p>
+        <div *ngIf="employee.isFirstWork; then yes else no"></div>
+        <ng-template #yes><p class="work">tak</p></ng-template>
+        <ng-template #no><p class="work">nie</p></ng-template>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <table *ngIf="employee.works &&employee.works.length>0; else noWorkInfo" class="cs-table table table-striped">
+            <thead>
+            <tr>
+              <th>Okres od</th>
+              <th>Okres do</th>
+              <th>Nazwa zakładu pracy</th>
+              <th>Miejscowość</th>
+              <th>Stanowisko</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let employeeWork of employee.works; let i = index" class="row-contact">
+              <td>{{employeeWork.fromJob}}</td>
+              <td>{{employeeWork.toJob}}</td>
+              <td> {{employeeWork.companyName}}</td>
+              <td> {{employeeWork.placeJob}}</td>
+              <td> {{employeeWork.positionJob}}</td>
+            </tr>
+            </tbody>
+          </table>
+          <ng-template #noWorkInfo>
+            <div class="no-Work-Info">
+              <p>Brak</p>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="shadow-sm card w-100">
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <p>
+            Wyrażam zgodę na przetwarzanie moich danych osobowych w firmie XYZ Sp. z o. o.
+            Jednocześnie oświadczam, że przekazuję moje dane osobowe całkowicie dobrowolnie.
+            Oświadczam ponadto, że zostałem/zostałam poinformowany/poinformowana o przysługującym mi prawie dostępu do
+            treści
+            tych danych i możliwości ich poprawiania, a także o prawie wycofania zgody na przetwarzanie tych danych w
+            każdym czasie.</p>
+        </div>
+      </div>
+
+
+      <div class="row ">
+        <div class="col">Miejscowość {{employee.updateCity}}, dnia {{employee.updateDate | date: FULL_DATE_FORMAT}}
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-group d-flex " role="group">
+      <button mat-button class="btn btn-large btn-secondary w-75 " (click)="onCloseWithoutChanges()">Zamknij</button>
+      <!--      <button mat-button class="btn btn-large btn-info w-75" (click)="generatePdf()">Pobierz PDF</button>-->
+      <button mat-button class="btn btn-large btn-success w-75" (click)="goToEditEmployee()">Edytuj</button>
+
+    </div>
+
+    <ng-template #emptyInfo>
+      <div class="no-info-of-table">
+        <p>Brak informacji</p>
+      </div>
+    </ng-template>
+
+  </div>
+  <!--  </div>-->
+
+</mat-dialog-content>
+

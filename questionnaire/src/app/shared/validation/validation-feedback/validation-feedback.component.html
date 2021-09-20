@@ -1,0 +1,6 @@
+<div *ngIf="control.hasError('required')  && (control.touched  || control.dirty || control.pristine)">{{controlName}} jest wymagan{{lastLetter}}</div>
+<div *ngIf="control.hasError('maxlength') && control.dirty">Pole {{controlName}} jest za długie (max. {{maxLength}})</div>
+<div *ngIf="control.hasError('minlength') && control.dirty">Pole {{controlName}} jest za krótkie (min. {{minLength}})</div>
+<div *ngIf="control.hasError('pattern') && control.dirty">{{controlName}} nie może posiadać liter</div>
+
+
