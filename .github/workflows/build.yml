@@ -6,34 +6,41 @@ on:
       - main
 
 jobs:
-  web-deploy:
-
-    name: Deploy Angular App
+  build:
+    # using Ubuntu
     runs-on: ubuntu-latest
-
-    env:
-      SERVER: waws-prod-ln1-025.ftp.azurewebsites.windows.net
-
+    defaults:
+      run:
+        working-directory: ./
     steps:
-      - name: Get latest code
-        uses: actions/checkout@v2.3.2
-
-      - name: Use Node.js 14 LTS
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1 #this installs node and npm for us
         with:
-          node-version: '14'
+          node-version: &#39;12.x&#39;
 
-      - name: Install NPM Modules
+      - uses: actions/cache@v1 # this allows for re-using node_modules caching, making builds a bit faster.
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles(&#39;**/package-lock.json&#39;) }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: NPM Install
         run: npm install
+      - name: NPM Install Angular
+        run: npm install -g @angular/cli &gt; /dev/null
+      - name: NPM build Angular Production
+        run: ng build --prod
+      - name: Delete Existing Files
+        run : sudo sshpass -p ${{ secrets.SSH_PASS }} -v ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} &#39;rm -rf /home/runcloud/webapps/viuweb/*&#39;
 
-      - name: Build Project
-        run: npm run build
+      - name: Compress and Copy New Files to server
+        run : |
+          cd dist/questionnaire
+          tar -czvf ../../questionnaire.tar.gz ./
+          cd ..
+          cd ..
+          sudo sshpass -p ${{ secrets.API_TOKEN_GITHUB }} scp -v -o StrictHostKeyChecking=no -r viusasa.tar.gz ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/runcloud/webapps/viuweb
+      - name: Uncompress new Files
+        run : sudo sshpass -p ${{ secrets.SSH_PASS }} -v ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} &#39;cd /home/runcloud/webapps/viuweb/ && tar -xzvf viusasa.tar.gz && rm viusasa.tar.gz&#39;
 
-      - name: Sync Files
-        uses: SamKirkland/FTP-Deploy-Action@4.0.0
-        with:
-          server: ${{ env.SERVER }}
-          local-dir: ./dist/
-          server-dir: ./site/wwwroot/
-          dangerous-clean-slate: true
           token: ${{ secrets.API_TOKEN_GITHUB }}
