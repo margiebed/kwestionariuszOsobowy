@@ -1,21 +1,24 @@
 package initialize;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import drivers.DriverManager;
+import drivers.DriverUtils;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import static navigation.applicationUrl.URL;
+
+
 public class TestBase {
-  public WebDriver driver;
 
   @BeforeMethod
   public void beforeTest() {
-
+    DriverManager.getWebDriver();
+    DriverUtils.setInitialConfiguration();
+    DriverUtils.navigateToPage(URL);
   }
 
   @AfterMethod
   public void afterTest() {
-    Browser.close();
-    Browser.quit();
+  DriverManager.disposeDriver();
   }
 }

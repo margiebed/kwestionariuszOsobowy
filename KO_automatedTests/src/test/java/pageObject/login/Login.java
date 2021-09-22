@@ -1,18 +1,25 @@
 package pageObject.login;
 
-import initialize.Browser;
+import drivers.DriverManager;
 import org.openqa.selenium.support.PageFactory;
+
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
+import pageObject.dashboard.Dashboard;
 
 public class Login extends LoginElements {
 
   public Login() {
-    PageFactory.initElements(Browser.driver(), this);
+    PageFactory.initElements(DriverManager.getWebDriver(), this);
   }
+  private Logger logger = LogManager.getRootLogger();
 
-  public Login loginAsUser() {
+  public Dashboard loginAsUser() {
     emailElement.sendKeys("test@test.com");
     passwordElement.sendKeys("qwerty");
+    logger.info("Logowanie na " + emailElement.getText());
     loginButtonElement.click();
-    return this;
+    return new Dashboard();
   }
 }

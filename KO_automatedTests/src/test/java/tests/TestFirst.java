@@ -1,21 +1,24 @@
 package tests;
 
+import drivers.DriverUtils;
 import initialize.TestBase;
 import org.testng.annotations.Test;
-import pageObject.dashboard.Dashboard;
 import pageObject.homePage.HomePage;
-import pageObject.login.Login;
+
+import static navigation.applicationUrl.LOGIN_URL;
 
 public class TestFirst extends TestBase {
-  HomePage homePage = new HomePage();
+
 
   @Test
   public void myFirstTest() {
-    homePage.get();
-    Login login = new Login();
-    login.loginAsUser();
-    Dashboard dashboard = new Dashboard();
-    dashboard.checkThatLoginTextIsDisplyed();
+    DriverUtils.navigateToPage(LOGIN_URL);
+    HomePage homePage = new HomePage();
+
+    homePage
+        .goToLoginPage()
+        .loginAsUser()
+        .checkThatLoginTextIsDisplyed();
   }
 
 }

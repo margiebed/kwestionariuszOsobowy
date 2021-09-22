@@ -1,16 +1,15 @@
 package pageObject.dashboard;
 
-import initialize.Browser;
+
+import drivers.DriverManager;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-
-import java.time.Duration;
 
 public class Dashboard extends DashboardElements{
 
 
   public Dashboard() {
-    PageFactory.initElements(Browser.driver(), this);
+    PageFactory.initElements(DriverManager.getWebDriver(), this);
   }
 
   public String getLoginEmailText(){
@@ -18,8 +17,8 @@ public class Dashboard extends DashboardElements{
   }
 
 
-  public void checkThatLoginTextIsDisplyed() {
-    Browser.driver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-    Assert.assertEquals(getLoginEmailText(), "test@test.com");
+  public Dashboard checkThatLoginTextIsDisplyed() {
+    Assert.assertEquals(getLoginEmailText(), "Hello, test@test.com");
+    return new Dashboard();
   }
 }
