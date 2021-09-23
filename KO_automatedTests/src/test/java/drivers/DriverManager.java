@@ -1,5 +1,6 @@
 package drivers;
 
+import configuration.LocalWebDriverProperties;
 import org.openqa.selenium.WebDriver;
 
 public class DriverManager {
@@ -12,14 +13,14 @@ public class DriverManager {
   public static WebDriver getWebDriver() {
 
     if (driver == null) {
-      driver = BrowserFactory.getBrowser(BROWSER_TYPE);
+      driver = BrowserFactory.getBrowser(LocalWebDriverProperties.getLocalBrowser());
     }
     return driver;
   }
 
   public static void disposeDriver(){
     driver.close();
-    if (!BROWSER_TYPE.equals(BrowserType.FIREFOX)) {
+    if (!LocalWebDriverProperties.getLocalBrowser().equals(BrowserType.FIREFOX)) {
       driver.quit();
     }
       driver = null; //w instancji jest obiekt i po wywołaniu ponownie jetWebdriver może pamiętać wcześniejszą
