@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 public class DriverManager {
 
   private static WebDriver driver; //zabezpieczamy się że mamy instancję tylko jednej klasy
-  private static final BrowserType BROWSER_TYPE = BrowserType.FIREFOX;
+  private static final BrowserType BROWSER_TYPE = BrowserType.CHROME;
   private  DriverManager() { //korzystając ze wzorca singleton konstruktor musi być prywatny
   }
 
