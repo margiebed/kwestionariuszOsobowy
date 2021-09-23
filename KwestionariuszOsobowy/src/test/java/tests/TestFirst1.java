@@ -7,7 +7,7 @@ import pageObject.homePage.HomePage;
 
 import static navigation.applicationUrl.LOGIN_URL;
 
-public class TestFirst extends TestBase {
+public class TestFirst1 extends TestBase {
 
 
   @Test
