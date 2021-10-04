@@ -1,9 +1,11 @@
 package pageObject.dashboard;
 
 
-import drivers.DriverManager;
+import driver.DriverManager;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+
+import static generic.assertions.AssertWebElement.assertThat;
 
 public class Dashboard extends DashboardElements{
 
@@ -13,12 +15,16 @@ public class Dashboard extends DashboardElements{
   }
 
   public String getLoginEmailText(){
-    return loginTextElement.getText();
+
+    return loginTextElement.getText().toString();
   }
 
 
-  public Dashboard checkThatLoginTextIsDisplyed() {
-    Assert.assertEquals(getLoginEmailText(), "Hello, test@test.com");
+  public Dashboard assertThatLoginTextIsDisplyed() {
+//    Assert.assertEquals(getLoginEmailText(), "Hello, test@test.com");
+    assertThat(loginTextElement).isDisplayed();
     return new Dashboard();
   }
+
+
 }
